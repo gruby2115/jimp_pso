@@ -5,28 +5,28 @@
 #include <stdio.h>
 #include "map.h"
 
-// Struktura pojedynczej cz箂tki
+// Struktura pojedynczej cz膮stki
 typedef struct {
-    double x, y;          // Aktualna pozycja
-    double vx, vy;        // Aktualna pr阣ko滄
-    double pBest_x, pBest_y; // Najlepsza pozycja znaleziona przez drona
-    double pBest_val;     // Warto滄 sygna硊 w pBest
-    double current_val;   // Aktualna warto滄 sygna硊
+	double x, y;	// Aktualna pozycja
+	double vx, vy;	// Aktualna pr臋dko艣膰
+	double pBest_x, pBest_y; // Najlepsza pozycja znaleziona przez drona
+	double pBest_val;	// Warto艣膰 sygna艂u w pBest
+	double current_val;	// Aktualna warto艣膰 sygna艂u
 } Particle;
 
 // Struktura roju
 typedef struct {
-    Particle* particles;  // Tablica dynamiczna cz箂tek
-    int particle_count;
-    double gBest_x, gBest_y; // Najlepsza pozycja znaleziona przez r骿
-    double gBest_val;     // Warto滄 sygna硊 w gBest
+	Particle* particles;	// Tablica dynamiczna cz膮stek
+	int particle_count;
+	double gBest_x, gBest_y;	// Najlepsza pozycja znaleziona przez r贸j
+	double gBest_val;	// Warto艣膰 sygna艂u w gBest
 } Swarm;
 
 // Parametry PSO
 typedef struct {
-	double w;      // Wsp蟪czynnik bezw砤dno渃i
-	double c1;     // Wsp蟪czynnik poznawczy
-	double c2;     // Wsp蟪czynnik spo砮czny
+	double w;	// Wsp贸艂czynnik bezw艂adno艣ci
+	double c1;	// Wsp贸艂czynnik poznawczy
+	double c2;	// Wsp贸艂czynnik spo艂eczny
 }Parametry;
 
 // Funkcje PSO
