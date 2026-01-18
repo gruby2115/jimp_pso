@@ -5,10 +5,10 @@
 #include <stdlib.h>
 #include "pso.h"
 
-// Tworzy plik i wpisuje nag³ówek CSV
-void init_log_file(const char* filename);
+// Tworzy plik i wpisuje nagÂ³Ã³wek CSV
+void init_log_file(const char* plik);
 
-// Dopisuje aktualne pozycje wszystkich cz¹stek do pliku
-void log_swarm_state(const char* filename, Swarm* swarm, int it);
+// Dopisuje aktualne pozycje wszystkich czÂ¹stek do pliku
+void log_swarm_state(const char* plik, Swarm* swarm, int it);
 
 #endif
