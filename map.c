@@ -3,24 +3,24 @@
 #define KARA -10000.0
 
 Map* load_map(char* plik) {
-	FILE* file = fopen(filename, "r");
-	if (!file) {
+	FILE* file = fopen(plik, "r");
+	if (!plik) {
 		fprintf(stderr, "Nie udalo sie otworzyc pliku mapy");
 		return NULL;
 	}
 
 	int w, h;
 	// Odczyt wymiarów
-	if (fscanf(file, "%d %d", &w, &h) != 2) {
+	if (fscanf(plik, "%d %d", &w, &h) != 2) {
 		fprintf(stderr, "Blad formatu naglowka mapy\n");
-		fclose(file);
+		fclose(plik);
 		return NULL;
 	}
 
 	// Alokacja struktury
 	Map* map = (Map*)malloc(sizeof(Map));
 	if (!map) {
-		fclose(file);
+		fclose(plik);
 		return NULL;
 	}
 	map->width = w;
@@ -30,19 +30,18 @@ Map* load_map(char* plik) {
 	map->signal = (double**)malloc(h * sizeof(double*));
 	if (!map->signal) {
 		free(map);
-		fclose(file);
+		fclose(plik);
 		return NULL;
 	}
 
 	for (int i = 0; i < h; i++) {
 		map->signal[i] = (double*)malloc(w * sizeof(double));
 		if (!map->signal[i]) {
-			// W razie błędu trzeba zwolnić to co już zaalokowaliśmy
 			for (int j = 0; j < i; j++)
 				free(map->signal[j]);
 			free(map->signal);
 			free(map);
-			fclose(file);
+			fclose(plik);
 			return NULL;
 		}
 	}
@@ -50,9 +49,9 @@ Map* load_map(char* plik) {
 	// Wczytywanie wartości
 	for (int y = 0; y < h; y++) {
 		for (int x = 0; x < w; x++) {
-			if (fscanf(file, "%lf", &map->signal[y][x]) != 1) {
+			if (fscanf(plik, "%lf", &map->signal[y][x]) != 1) {
 				fprintf(stderr, "Blad odczytu danych mapy w wierszu %d\n", y);
-				fclose(file);
+				fclose(plik);
 				return NULL;
 			}
 		}
