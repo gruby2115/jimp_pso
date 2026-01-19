@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
 
 	// Przygotowanie pliku logów, jeśli użytkownik tego chce
 	if (log_interval > 0) {
-		init_log_file("pso_wyniki.csv");
+		init_log_file("pso_results.csv");
 	}
 
 	// Główna pętla symulacji
