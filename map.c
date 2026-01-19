@@ -4,23 +4,23 @@
 
 Map* load_map(char* plik) {
 	FILE* file = fopen(plik, "r");
-	if (!plik) {
+	if (!file) {
 		fprintf(stderr, "Nie udalo sie otworzyc pliku mapy");
 		return NULL;
 	}
 
 	int w, h;
 	// Odczyt wymiarów
-	if (fscanf(plik, "%d %d", &w, &h) != 2) {
+	if (fscanf(file, "%d %d", &w, &h) != 2) {
 		fprintf(stderr, "Blad formatu naglowka mapy\n");
-		fclose(plik);
+		fclose(file);
 		return NULL;
 	}
 
 	// Alokacja struktury
 	Map* map = (Map*)malloc(sizeof(Map));
 	if (!map) {
-		fclose(plik);
+		fclose(file);
 		return NULL;
 	}
 	map->width = w;
@@ -30,7 +30,7 @@ Map* load_map(char* plik) {
 	map->signal = (double**)malloc(h * sizeof(double*));
 	if (!map->signal) {
 		free(map);
-		fclose(plik);
+		fclose(file);
 		return NULL;
 	}
 
@@ -41,7 +41,7 @@ Map* load_map(char* plik) {
 				free(map->signal[j]);
 			free(map->signal);
 			free(map);
-			fclose(plik);
+			fclose(file);
 			return NULL;
 		}
 	}
@@ -49,9 +49,9 @@ Map* load_map(char* plik) {
 	// Wczytywanie wartości
 	for (int y = 0; y < h; y++) {
 		for (int x = 0; x < w; x++) {
-			if (fscanf(plik, "%lf", &map->signal[y][x]) != 1) {
+			if (fscanf(file, "%lf", &map->signal[y][x]) != 1) {
 				fprintf(stderr, "Blad odczytu danych mapy w wierszu %d\n", y);
-				fclose(plik);
+				fclose(file);
 				return NULL;
 			}
 		}
