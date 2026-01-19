@@ -1,6 +1,5 @@
 #include <math.h>
 #include "pso.h"
-#include "utils.h"
 
 // Losowa liczba z zakresu [0, 1]
 double random_01() {
